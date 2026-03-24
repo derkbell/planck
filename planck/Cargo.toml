@@ -1,10 +1,11 @@
 [package]
 name = "planck-pack"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 authors = ["Derk Bell"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/derkbell/planck"
+readme = "../README.md"
 description = "Mixed-radix bit-packing serialization for Rust"
 keywords = ["serialization", "encoding", "bit-packing", "mixed-radix", "no_std"]
 categories = ["encoding", "no-std::no-alloc", "embedded"]
@@ -16,5 +17,5 @@ alloc = ["planck-pack-core/alloc"]
 derive = ["dep:planck-pack-derive"]
 
 [dependencies]
-planck-pack-core = { version = "0.1.0", path = "../planck-core", default-features = false }
-planck-pack-derive = { version = "0.1.0", path = "../planck-derive", optional = true }
+planck-pack-core = { version = "0.1.1", path = "../planck-core", default-features = false }
+planck-pack-derive = { version = "0.1.1", path = "../planck-derive", optional = true }
