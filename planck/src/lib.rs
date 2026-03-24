@@ -12,7 +12,7 @@
 //! Derive [`Planck`] on your types and use [`Pack::encode`] / [`Pack::decode`]:
 //!
 //! ```
-//! use planck::{Planck, Pack, Packable};
+//! use planck_pack::{Planck, Pack, Packable};
 //!
 //! #[derive(Debug, PartialEq, Planck)]
 //! struct Birthday {
@@ -40,7 +40,7 @@
 //! payload in the radix — the discriminant is absorbed for free:
 //!
 //! ```
-//! use planck::{Planck, Pack, Packable};
+//! use planck_pack::{Planck, Pack, Packable};
 //!
 //! #[derive(Debug, PartialEq, Planck)]
 //! enum Color { Red, Green, Blue }  // RADIX = 3
@@ -63,7 +63,7 @@
 //! You can implement [`Packable`] by hand for custom encoding logic:
 //!
 //! ```
-//! use planck::{Packable, Pack, DecodeError};
+//! use planck_pack::{Packable, Pack, DecodeError};
 //!
 //! #[derive(Debug, PartialEq)]
 //! enum Suit { Hearts, Diamonds, Clubs, Spades }
@@ -103,7 +103,7 @@
 //! directly — for example to embed a value into a larger encoding scheme:
 //!
 //! ```
-//! use planck::{Planck, Packable};
+//! use planck_pack::{Planck, Packable};
 //!
 //! #[derive(Debug, PartialEq, Planck)]
 //! enum Color { Red, Green, Blue }
@@ -113,7 +113,7 @@
 //! assert!(Color::from_ordinal(3).is_err()); // only 3 values exist
 //! ```
 
-pub use planck_core::{DecodeError, Pack, Packable};
+pub use planck_pack_core::{DecodeError, Pack, Packable};
 
 #[cfg(feature = "derive")]
-pub use planck_derive::Planck;
+pub use planck_pack_derive::Planck;

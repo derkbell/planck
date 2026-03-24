@@ -16,7 +16,7 @@ use crate::error::DecodeError;
 /// # Manual Implementation
 ///
 /// ```
-/// use planck_core::{Packable, DecodeError};
+/// use planck_pack_core::{Packable, DecodeError};
 ///
 /// struct DieRoll(u8); // 1-6
 ///

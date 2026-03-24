@@ -1,4 +1,4 @@
-use planck::{Pack, Packable, Planck};
+use planck_pack::{Pack, Packable, Planck};
 
 // --- Enum with data-carrying variants ---
 

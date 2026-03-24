@@ -1,4 +1,4 @@
-use planck::{Pack, Packable, Planck};
+use planck_pack::{Pack, Packable, Planck};
 
 #[derive(Debug, PartialEq, Planck)]
 enum Color {

@@ -13,7 +13,7 @@ mod codegen;
 /// # Structs
 ///
 /// ```ignore
-/// use planck::{Planck, Pack, Packable};
+/// use planck_pack::{Planck, Pack, Packable};
 ///
 /// #[derive(Debug, PartialEq, Planck)]
 /// struct Birthday {
@@ -35,7 +35,7 @@ mod codegen;
 /// of their fields' radixes. The enum's total radix is the sum across all variants:
 ///
 /// ```ignore
-/// use planck::{Planck, Packable};
+/// use planck_pack::{Planck, Packable};
 ///
 /// #[derive(Planck)]
 /// enum Color { Red, Green, Blue }

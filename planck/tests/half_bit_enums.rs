@@ -1,4 +1,4 @@
-use planck::{Pack, Packable, Planck};
+use planck_pack::{Pack, Packable, Planck};
 
 /// The key insight: when an enum has variants carrying Planck types,
 /// the variant discriminant costs ZERO extra bits if the types have

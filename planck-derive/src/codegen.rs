@@ -24,16 +24,16 @@ fn generate_struct(input: &DeriveInput, data: &DataStruct) -> syn::Result<TokenS
         Fields::Unit => {
             // Unit struct: RADIX = 1
             return Ok(quote! {
-                impl #impl_generics planck_core::Packable for #name #ty_generics #where_clause {
+                impl #impl_generics planck_pack_core::Packable for #name #ty_generics #where_clause {
                     const RADIX: u128 = 1;
 
                     fn to_ordinal(&self) -> u128 { 0 }
 
-                    fn from_ordinal(ord: u128) -> Result<Self, planck_core::DecodeError> {
+                    fn from_ordinal(ord: u128) -> Result<Self, planck_pack_core::DecodeError> {
                         if ord == 0 {
                             Ok(#name)
                         } else {
-                            Err(planck_core::DecodeError::OrdinalOutOfRange { ordinal: ord, radix: 1 })
+                            Err(planck_pack_core::DecodeError::OrdinalOutOfRange { ordinal: ord, radix: 1 })
                         }
                     }
                 }
@@ -72,15 +72,15 @@ fn generate_struct(input: &DeriveInput, data: &DataStruct) -> syn::Result<TokenS
                 };
             });
         } else {
-            radix_parts.push(quote! { <#field_ty as planck_core::Packable>::RADIX });
+            radix_parts.push(quote! { <#field_ty as planck_pack_core::Packable>::RADIX });
             encode_parts.push(quote! {
-                planck_core::Packable::to_ordinal(&self.#field_name)
+                planck_pack_core::Packable::to_ordinal(&self.#field_name)
             });
             decode_parts.push(quote! {
                 let #field_name = {
-                    let ord_val = __ord % <#field_ty as planck_core::Packable>::RADIX;
-                    __ord /= <#field_ty as planck_core::Packable>::RADIX;
-                    <#field_ty as planck_core::Packable>::from_ordinal(ord_val)?
+                    let ord_val = __ord % <#field_ty as planck_pack_core::Packable>::RADIX;
+                    __ord /= <#field_ty as planck_pack_core::Packable>::RADIX;
+                    <#field_ty as planck_pack_core::Packable>::from_ordinal(ord_val)?
                 };
             });
         }
@@ -116,17 +116,17 @@ fn generate_struct(input: &DeriveInput, data: &DataStruct) -> syn::Result<TokenS
     };
 
     Ok(quote! {
-        impl #impl_generics planck_core::Packable for #name #ty_generics #where_clause {
+        impl #impl_generics planck_pack_core::Packable for #name #ty_generics #where_clause {
             const RADIX: u128 = #radix_expr;
 
             fn to_ordinal(&self) -> u128 {
                 #encode_body
             }
 
-            fn from_ordinal(mut __ord: u128) -> Result<Self, planck_core::DecodeError> {
+            fn from_ordinal(mut __ord: u128) -> Result<Self, planck_pack_core::DecodeError> {
                 #(#decode_parts)*
                 if __ord != 0 {
-                    return Err(planck_core::DecodeError::ExcessData);
+                    return Err(planck_pack_core::DecodeError::ExcessData);
                 }
                 Ok(Self { #(#field_names),* })
             }
@@ -269,7 +269,7 @@ fn generate_enum(input: &DeriveInput, data: &DataEnum) -> syn::Result<TokenStrea
     }
 
     Ok(quote! {
-        impl #impl_generics planck_core::Packable for #name #ty_generics #where_clause {
+        impl #impl_generics planck_pack_core::Packable for #name #ty_generics #where_clause {
             const RADIX: u128 = #total_radix;
 
             fn to_ordinal(&self) -> u128 {
@@ -279,10 +279,10 @@ fn generate_enum(input: &DeriveInput, data: &DataEnum) -> syn::Result<TokenStrea
                 }
             }
 
-            fn from_ordinal(__ord: u128) -> Result<Self, planck_core::DecodeError> {
+            fn from_ordinal(__ord: u128) -> Result<Self, planck_pack_core::DecodeError> {
                 let mut __base: u128 = 0;
                 #(#from_ordinal_arms)*
-                Err(planck_core::DecodeError::OrdinalOutOfRange {
+                Err(planck_pack_core::DecodeError::OrdinalOutOfRange {
                     ordinal: __ord,
                     radix: Self::RADIX,
                 })
@@ -333,8 +333,8 @@ fn generate_variant_fields(
             radix_parts.push(quote! { #radix });
             field_radixes.push((binding, quote! { #radix }, Some(start)));
         } else {
-            radix_parts.push(quote! { <#field_ty as planck_core::Packable>::RADIX });
-            field_radixes.push((binding, quote! { <#field_ty as planck_core::Packable>::RADIX }, None));
+            radix_parts.push(quote! { <#field_ty as planck_pack_core::Packable>::RADIX });
+            field_radixes.push((binding, quote! { <#field_ty as planck_pack_core::Packable>::RADIX }, None));
         }
     }
 
@@ -353,7 +353,7 @@ fn generate_variant_fields(
         let val_expr = if let Some(start) = offset {
             quote! { (*#binding as i128 - #start) as u128 }
         } else {
-            quote! { planck_core::Packable::to_ordinal(#binding) }
+            quote! { planck_pack_core::Packable::to_ordinal(#binding) }
         };
         encode_expr = quote! { (#encode_expr) * #radix + #val_expr };
     }
@@ -370,7 +370,7 @@ fn generate_variant_fields(
         } else {
             let field_ty = &fields[decode_stmts.len()].ty;
             decode_stmts.push(quote! {
-                let #binding = <#field_ty as planck_core::Packable>::from_ordinal(__local % #radix)?;
+                let #binding = <#field_ty as planck_pack_core::Packable>::from_ordinal(__local % #radix)?;
                 __local /= #radix;
             });
         }

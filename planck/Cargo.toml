@@ -1,5 +1,5 @@
 [package]
-name = "planck"
+name = "planck-pack"
 version = "0.1.0"
 edition = "2024"
 authors = ["Derk Bell"]
@@ -11,10 +11,10 @@ categories = ["encoding", "no-std::no-alloc", "embedded"]
 
 [features]
 default = ["std", "derive"]
-std = ["planck-core/std"]
-alloc = ["planck-core/alloc"]
-derive = ["dep:planck-derive"]
+std = ["planck-pack-core/std"]
+alloc = ["planck-pack-core/alloc"]
+derive = ["dep:planck-pack-derive"]
 
 [dependencies]
-planck-core = { path = "../planck-core", default-features = false }
-planck-derive = { path = "../planck-derive", optional = true }
+planck-pack-core = { path = "../planck-core", default-features = false }
+planck-pack-derive = { path = "../planck-derive", optional = true }

@@ -15,7 +15,7 @@ use alloc::vec::Vec;
 /// # Example
 ///
 /// ```
-/// use planck_core::{Packable, Pack};
+/// use planck_pack_core::{Packable, Pack};
 ///
 /// // bool has RADIX = 2, so it encodes to 1 byte
 /// assert_eq!(bool::byte_size(), 1);
