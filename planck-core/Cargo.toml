@@ -3,7 +3,11 @@ name = "planck-core"
 version = "0.1.0"
 edition = "2024"
 authors = ["Derk Bell"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/derkbell/planck"
 description = "Core traits and encoding logic for planck mixed-radix bit-packing"
+keywords = ["serialization", "encoding", "bit-packing", "mixed-radix", "no_std"]
+categories = ["encoding", "no-std::no-alloc"]
 
 [features]
 default = ["std"]

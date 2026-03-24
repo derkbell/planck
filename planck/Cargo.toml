@@ -3,7 +3,11 @@ name = "planck"
 version = "0.1.0"
 edition = "2024"
 authors = ["Derk Bell"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/derkbell/planck"
 description = "Mixed-radix bit-packing serialization for Rust"
+keywords = ["serialization", "encoding", "bit-packing", "mixed-radix", "no_std"]
+categories = ["encoding", "no-std::no-alloc", "embedded"]
 
 [features]
 default = ["std", "derive"]

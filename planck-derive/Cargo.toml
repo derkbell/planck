@@ -3,7 +3,10 @@ name = "planck-derive"
 version = "0.1.0"
 edition = "2024"
 authors = ["Derk Bell"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/derkbell/planck"
 description = "Derive macros for planck mixed-radix bit-packing"
+keywords = ["serialization", "encoding", "bit-packing", "mixed-radix", "derive"]
 
 [lib]
 proc-macro = true
