@@ -17,5 +17,5 @@ alloc = ["planck-pack-core/alloc"]
 derive = ["dep:planck-pack-derive"]
 
 [dependencies]
-planck-pack-core = { version = "0.1.1", path = "../planck-core", default-features = false }
-planck-pack-derive = { version = "0.1.1", path = "../planck-derive", optional = true }
+planck-pack-core = { version = "0.1.0", path = "../planck-core", default-features = false }
+planck-pack-derive = { version = "0.1.0", path = "../planck-derive", optional = true }
