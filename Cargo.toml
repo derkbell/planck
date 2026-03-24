@@ -1,0 +1,3 @@
+[workspace]
+members = ["planck-core", "planck-derive", "planck"]
+resolver = "2"

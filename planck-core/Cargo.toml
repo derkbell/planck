@@ -1,0 +1,11 @@
+[package]
+name = "planck-core"
+version = "0.1.0"
+edition = "2024"
+authors = ["Derk Bell"]
+description = "Core traits and encoding logic for planck mixed-radix bit-packing"
+
+[features]
+default = ["std"]
+std = ["alloc"]
+alloc = []

@@ -1,0 +1,16 @@
+[package]
+name = "planck"
+version = "0.1.0"
+edition = "2024"
+authors = ["Derk Bell"]
+description = "Mixed-radix bit-packing serialization for Rust"
+
+[features]
+default = ["std", "derive"]
+std = ["planck-core/std"]
+alloc = ["planck-core/alloc"]
+derive = ["dep:planck-derive"]
+
+[dependencies]
+planck-core = { path = "../planck-core", default-features = false }
+planck-derive = { path = "../planck-derive", optional = true }
